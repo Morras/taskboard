@@ -1,0 +1,20 @@
+﻿    
+    <div class="task-list">
+        <p>
+            <h3>Must do</h3>
+            <div data-task-directive data-ng-repeat="task in mustDos" data-task="task"></div>
+        </p>
+        <p>
+            <h3>Would like to do</h3>
+            <div data-task-directive data-ng-repeat="task in wantToDos" data-task="task"></div>
+        </p>
+        <a class="white-text" href="#editTask/0">Add task</a>
+        <p>
+            <div data-ng-show="{{lastPeriodsTasks.length > 0}}">
+                <h3>Last period I completed these tasks</h3>
+                <div data-task-directive data-ng-repeat="task in lastPeriodsTasks" data-task="task" data-is-old-task="true"></div>
+                <h2 class="pull-right">{{jubilation}}!</h2>
+            </div>
+        </p>
+        <a href="#manageRecurringTasks?id=2">Manage recurring tasks</a>
+    </div>

@@ -1,0 +1,26 @@
+<div class="edit-task">
+    <h3>Edit task</h3>
+    <form name="taskForm">
+        I would like to <br />
+        <div>
+            <input type="text" class="fill-width" ng-model="task.text" ng-class="{'has-error' : taskForm.$invalid && !taskForm.$pristine }" required /> <br />
+        </div>
+        Which consists of
+        <input type="number" class="amount-input" ng-model="task.amount" ng-class="{'has-error' : taskForm.$invalid && !taskForm.$pristine }" required />
+        units of work<br />
+        <div class="check-box-div-padder">
+            This task is a must do:
+            <input type="checkbox" ng-model="task.mustDo" id="must-do-checkbox" class="regular-checkbox">
+            <label for="must-do-checkbox"></label>
+        </div>
+
+        <div class="clearfix">
+            <div class=" pull-right">
+                <button type="button" class="btn" data-ng-click="">Cancel</button>
+                <button type="submit" data-ng-disabled="modalForm.$invalid" class="btn btn-primary" data-ng-click="">OK</button>
+            </div>
+        </div>
+
+    </form>
+ </div>
+<a class="pull-right" href="#">Edit parental recurring task instead</a><br />

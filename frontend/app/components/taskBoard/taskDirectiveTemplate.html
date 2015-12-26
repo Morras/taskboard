@@ -1,0 +1,10 @@
+﻿<div class="task clearfix">
+    <span class="task-text pull-left">{{task.text}}</span>
+    <span class="task-progress pull-right"> <span data-ng-style="{ 'font-weight': task.progress >= task.totalWork ? 'bold' : 'none' }">{{task.progress}}</span>/{{task.totalWork}}</span>
+    <br />
+    <div ng-hide="{{task.isOldTask}}">
+        <div class="progress" data-ng-style="{ width: task.progress/task.totalWork*100 +'%'}"></div>
+        <a class="pull-left" href="#editTask/{{ task.id }}">Edit task</a>
+        <a class="pull-right" href="javascript:void(0);" data-ng-click="addWorkModal()">Record completed work</a>
+    </div>
+</div>

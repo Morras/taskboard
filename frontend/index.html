@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Task board</title>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/taskBoard.css" rel="stylesheet" />
+</head>
+
+<body data-ng-app="taskBoardApp">
+
+    <div class="container">
+        <div data-ng-view></div>
+    </div>
+
+
+    <!-- load third party libraries-->
+    <script src="assets/libs/angular.js"></script>
+    <script src="assets/libs/angular-route.js"></script>
+    <script src="assets/libs/ui-bootstrap.js"></script>
+
+
+    <!-- load app libraries -->
+
+    <script src="app/configApp.js"></script>
+
+    <script src="app/components/shared/task.js"></script>
+    <script src="app/components/shared/taskBoardFactory.js"></script>
+    <script src="app/components/taskBoard/addWorkModalFactory.js"></script>
+    <script src="app/components/taskBoard/taskBoardController.js"></script>
+    <script src="app/components/taskBoard/taskDirective.js"></script>
+    <script src="app/components/editTask/editTaskController.js"></script>
+    <script src="app/components/manageRecurringTasks/manageRecurringTasksController.js"></script>
+
+</body>
+</html>
