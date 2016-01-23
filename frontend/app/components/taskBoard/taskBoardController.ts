@@ -49,3 +49,12 @@ module tasks.controllers {
         }
     }
 }
+tasks.taskBoardApp.controller(
+    'taskBoardController', 
+    [
+        '$scope', 
+        '$timeout', 
+        'taskBoardFactory',
+        ($scope, $timeout, TaskBoardFactory) => new tasks.controllers.TaskBoardController($scope, $timeout, TaskBoardFactory)
+    ]
+);

@@ -33,3 +33,11 @@ module tasks.directives{
         }
     }
 }
+
+tasks.taskBoardApp.directive(
+    'taskDirective', 
+    [
+        'addWorkModalFactory',
+        (AddWorkModalFactory) => new tasks.directives.TaskDirective(AddWorkModalFactory)
+    ]
+);

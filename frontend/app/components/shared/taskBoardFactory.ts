@@ -114,3 +114,11 @@ module tasks.factories{
 
     }
 }
+
+
+tasks.taskBoardApp.factory(
+    "taskBoardFactory", 
+    [
+        () => new tasks.factories.TaskBoardFactory()
+    ]
+);

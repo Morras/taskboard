@@ -20,3 +20,12 @@ module tasks.controllers{
         }
     }
 }
+
+tasks.taskBoardApp.controller(
+    "manageRecurringTasksController", 
+    [
+        '$scope', 
+        'taskBoardFactory',
+        ($scope, TaskBoardFactory) => new tasks.controllers.ManageRecurringTasksController($scope, TaskBoardFactory)
+    ]
+);

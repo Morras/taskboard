@@ -55,3 +55,12 @@ module tasks.factories{
         }
     }
 }
+
+
+tasks.taskBoardApp.factory(
+    "addWorkModalFactory", 
+    [
+        '$modal',
+        ($modal) => new tasks.factories.AddWorkModalFactory($modal)
+    ]
+);

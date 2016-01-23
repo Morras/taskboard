@@ -20,5 +20,14 @@ module tasks.controllers{
             console.log(this.routeParams.id);
         }
     }
-
 }
+
+tasks.taskBoardApp.controller(
+    'editTaskController', 
+    [
+        '$scope', 
+        'taskBoardFactory', 
+        '$routeParams',
+        ($scope, TaskBoardFactory, $routeParams) => new tasks.controllers.EditTaskController($scope, TaskBoardFactory, $routeParams)
+    ]
+);
