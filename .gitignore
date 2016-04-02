@@ -1,3 +1,4 @@
 /frontend/app/**/*.js
 *.map
 *.exe
+.vscode

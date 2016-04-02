@@ -12,12 +12,10 @@ module tasks.controllers{
 
         constructor($scope: ng.IScope, taskBoardFactory: tasks.factories.ITaskBoardFactory, $routeParams: ng.route.IRouteParamsService){
             this.scope = $scope;
+            this.scope.vm = this;
             this.taskBoardFactor = taskBoardFactory;
             this.routeParams = $routeParams;
-            this.scope.taskId = this.routeParams.id;
-
-            console.log(this.routeParams);
-            console.log(this.routeParams.id);
+            this.scope.vm.taskId = this.routeParams.id;
         }
     }
 }

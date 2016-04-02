@@ -17,11 +17,6 @@ module tasks{
                 controller: 'editTaskController',
                 templateUrl: '/app/components/editTask/editTaskView.html'
             })
-            .when('/manageRecurringTasks',
-            {
-                controller: 'manageRecurringTasksController',
-                templateUrl: '/app/components/manageRecurringTasks/manageRecurringTasksView.html'
-            })
             .otherwise({ redirectTo: '/' });
     }]);
 }

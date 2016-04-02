@@ -10,7 +10,6 @@
 ///<reference path="components/shared/task.ts" />
 ///<reference path="components/shared/taskBoardFactory.ts" />
 ///<reference path="components/editTask/editTaskController.ts" />
-///<reference path="components/manageRecurringTasks/manageRecurringTasksController.ts" />
 ///<reference path="components/taskBoard/addWorkModalFactory.ts" />
 ///<reference path="components/taskBoard/taskDirective.ts" />
 ///<reference path="components/taskBoard/taskBoardController.ts" />

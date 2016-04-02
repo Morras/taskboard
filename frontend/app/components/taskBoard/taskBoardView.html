@@ -2,11 +2,11 @@
     <div class="task-list">
         <p>
             <h3>Must do</h3>
-            <div data-task-directive data-ng-repeat="task in mustDos" data-task="task"></div>
+            <div data-task-directive data-ng-repeat="task in getMustDos()" data-task="task"></div>
         </p>
         <p>
             <h3>Would like to do</h3>
-            <div data-task-directive data-ng-repeat="task in wantToDos" data-task="task"></div>
+            <div data-task-directive data-ng-repeat="task in getWantToDos()" data-task="task"></div>
         </p>
         <a class="white-text" href="#editTask/0">Add task</a>
         <p>

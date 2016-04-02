@@ -7,7 +7,11 @@ module tasks.controllers {
         scope;
         timeout: ng.ITimeoutService;
         taskBoardFactory: tasks.factories.ITaskBoardFactory;
+        
+        tasks: tasks.shared.Task[];
+        lastPeriodsTasks: tasks.shared.Task[]
 
+        jubilation: string;
         jubilations:string[] = [
             'WOOHOO',
             'Way to go',
@@ -22,29 +26,21 @@ module tasks.controllers {
 
         constructor($scope, $timeout, taskBoardFactory) {
             this.scope = $scope;
+            this.scope.vm = this;
             this.taskBoardFactory = taskBoardFactory;
             this.timeout = $timeout;
 
-            this.setupScopeFunctions();
-            this.setupScopeVariables();
+            this.jubilation = this.jubilations[Math.floor(Math.random() * 100) % this.jubilations.length];
             this.tick();
         }
 
-        private setupScopeFunctions() {
-            this.scope.addWork = function (task: tasks.shared.Task, delta) {
-                //TODO hack to get up and running after migration0
-                task.progress[0].progress = task.progress[0].progress + parseInt(delta);
-            };
-        }
-
-        private setupScopeVariables() {
-            this.scope.jubilation = this.jubilations[Math.floor(Math.random() * 100) % this.jubilations.length];
-        }
+        addWork(task: tasks.shared.Task, delta) {
+            task.workDone += delta;
+        };
 
         tick() {
-            this.scope.mustDos = this.taskBoardFactory.getMustDos();
-            this.scope.wantToDos = this.taskBoardFactory.getWantToDos();
-            this.scope.lastPeriodsTasks = this.taskBoardFactory.getLastPeriodsTasks();
+            this.tasks = this.taskBoardFactory.getTasksInCurrentPeriod();
+            this.lastPeriodsTasks = this.taskBoardFactory.getTasksInPreviousPeriod();
             this.timeout(() => this.tick(), 1000);
         }
     }
