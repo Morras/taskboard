@@ -1,4 +1,4 @@
-package server
+package backend
 
 import (
 	"encoding/json"
@@ -12,10 +12,12 @@ import (
 	"google.golang.org/appengine"
 )
 
-type TaskApi struct {
+type TaskApi struct { //TODO move this file to backend folder instead
 }
 
 func (api TaskApi) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+
+//	panic("BOO!")
 
 	method := req.Method
 

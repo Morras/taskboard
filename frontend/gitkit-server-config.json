@@ -1,0 +1,8 @@
+{
+  "clientId": "766224789730-v2jdouqjkbp8vg21p5b6aaba3se3ndfo.apps.googleusercontent.com",
+  "projectId": "taskboard-1279",
+  "serviceAccountEmail": "",
+  "serviceAccountPrivateKeyFile": "../keys/taskboard-7e519cfa999e.p12",
+  "widgetUrl": "http://home.tildeslash.dk/login",
+  "cookieName": "gtoken"
+}
