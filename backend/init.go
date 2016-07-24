@@ -16,22 +16,23 @@ func init() {
 		UrlPathToApiRoot:   "/api/task",
 		UrlPathToLogin:     "/loggedin",
 		UrlPathToLogout:    "/loggedout",
-		LoginRedirectUrl:	"/",
-		LogoutRedirectUrl:	"/foo", //TODO
+		LoginRedirectUrl:   "/",
+		LogoutRedirectUrl:  "/foo", //TODO
 		Audiences:          []string{"taskboard-1279"},
-		SessionDuration:	24, //TODO
+		SessionDuration:    24, //TODO
 	}
 
-	userStore := userStore{}
-	ctxProvider := contextProvider{}
+	userStore := &userStore{}
+	ctxProvider := &contextProvider{}
+	logger := &GAELogger{}
 
-	gitserver.Setup(TaskApi{}, config, userStore, ctxProvider) //TODO figure out how it works with pointers and interfaces
+	gitserver.Setup(TaskApi{}, config, userStore, ctxProvider, logger)
 
 	log.Print(http.ListenAndServe(":8080", nil))
 }
 
 type contextProvider struct{}
 
-func (contextProvider) ContextFromRequest(req *http.Request) context.Context {
+func (*contextProvider) ContextFromRequest(req *http.Request) context.Context {
 	return appengine.NewContext(req)
 }
