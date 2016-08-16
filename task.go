@@ -34,7 +34,7 @@ func PutTasks(tasks []Task, user User, ctx context.Context) ([]Task, error) {
 	//Make sure the user owns all the tasks before
 	//trying to persist any of them
 	for _, t := range tasks {
-		if t.UserID != user.ID {
+		if t.UserID != user.UserID {
 			return nil, ErrorUnauthorized
 		}
 		if t.ID != 0 {
@@ -42,12 +42,12 @@ func PutTasks(tasks []Task, user User, ctx context.Context) ([]Task, error) {
 
 			var t Task
 			if err := datastore.Get(ctx, key, &t); err != nil {
-                if err == datastore.ErrNoSuchEntity {
-                    return nil, ErrorUpdatingUnknownEntity
-                }
+				if err == datastore.ErrNoSuchEntity {
+					return nil, ErrorUpdatingUnknownEntity
+				}
 				return nil, err
 			}
-			if t.UserID != user.ID {
+			if t.UserID != user.UserID {
 				return nil, ErrorUnauthorized
 			}
 		} else {
@@ -61,7 +61,7 @@ func PutTasks(tasks []Task, user User, ctx context.Context) ([]Task, error) {
 	if err != nil {
 		return nil, err
 	}
-    
+
 	for _, t := range tasks {
 		var key *datastore.Key
 		if t.ID == 0 {
@@ -74,11 +74,11 @@ func PutTasks(tasks []Task, user User, ctx context.Context) ([]Task, error) {
 		keys = append(keys, key)
 		intID++
 	}
-    
+
 	if _, err = datastore.PutMulti(ctx, keys, storedTasks); err != nil {
 		return nil, err
 	}
-    
+
 	return storedTasks, nil
 }
 
@@ -90,7 +90,7 @@ func DeleteTaskById(id int64, user User, ctx context.Context) error {
 		return err
 	}
 
-	if t.UserID != user.ID {
+	if t.UserID != user.UserID {
 		return ErrorUnauthorized
 	}
 
@@ -102,14 +102,14 @@ func DeleteTaskById(id int64, user User, ctx context.Context) error {
 
 func GetAllTasksForUser(u User, ctx context.Context) ([]Task, error) {
 	log.Printf("Getting all tasks for user %v", u)
-	return queryTask(ctx, filter{"UserIDxxx = ", u.ID})
+	return queryTask(ctx, filter{"UserID = ", u.UserID})
 }
 
 func GetTasksInPeriodForUser(u User, t time.Time, ctx context.Context) ([]Task, error) {
 	log.Printf("Getting all tasks for user %v with time %v", u, t)
 	periodStart := PeriodStartByTime(t)
 	log.Printf("periodStart %v", periodStart)
-	return queryTask(ctx, filter{"UserID = ", u.ID}, filter{"PeriodStart = ", periodStart})
+	return queryTask(ctx, filter{"UserID = ", u.UserID}, filter{"PeriodStart = ", periodStart})
 }
 
 type filter struct {

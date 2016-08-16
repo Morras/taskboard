@@ -1,7 +1,6 @@
 package backend
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/morras/gitserver"
@@ -12,12 +11,11 @@ import (
 func init() {
 
 	config := gitserver.Config{
-		FilePathToFrontend: "../frontend/",
-		UrlPathToApiRoot:   "/api/task",
-		UrlPathToLogin:     "/loggedin",
-		UrlPathToLogout:    "/loggedout",
-		LoginRedirectUrl:   "/",
-		LogoutRedirectUrl:  "/foo", //TODO
+		URLPathToLogin:     "/loggedin",
+		URLPathToLogout:    "/loggedout",
+		LoginRedirectURL:   "/foo",
+		LogoutRedirectURL:  "/login.html?mode=select", //TODO
+		NewUserRedirectURL: "/bar",
 		Audiences:          []string{"taskboard-1279"},
 		SessionDuration:    24, //TODO
 	}
@@ -26,9 +24,19 @@ func init() {
 	ctxProvider := &contextProvider{}
 	logger := &GAELogger{}
 
-	gitserver.Setup(TaskApi{}, config, userStore, ctxProvider, logger)
+	serveMux := http.NewServeMux()
 
-	log.Print(http.ListenAndServe(":8080", nil))
+	//Safe as it can only serve files from within the frontend directory
+	//At least according to the source but the doc does not mention this
+	fileHandler := http.FileServer(http.Dir("../frontend/"))
+
+	serveMux.Handle("/api/task", TaskApi{})
+
+	serveMux.Handle("/", fileHandler)
+
+	gitserver.Setup(serveMux, config, userStore, ctxProvider, logger)
+
+	http.DefaultServeMux = serveMux
 }
 
 type contextProvider struct{}

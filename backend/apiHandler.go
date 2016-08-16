@@ -17,7 +17,7 @@ type TaskApi struct { //TODO move this file to backend folder instead
 
 func (api TaskApi) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 
-//	panic("BOO!")
+	//	panic("BOO!")
 
 	method := req.Method
 
@@ -93,7 +93,7 @@ func writeTasksResponse(tasks []taskboard.Task, res http.ResponseWriter, err err
 //Returns true if there was an error and execution should stop,
 //(meaning that an error has been reported and nothing else should be written)
 func checkAndWriteError(err error, res http.ResponseWriter) bool {
-    if err == taskboard.ErrorTaskNotFound {
+	if err == taskboard.ErrorTaskNotFound {
 		res.WriteHeader(http.StatusNotFound)
 		res.Write([]byte(err.Error()))
 		return true
@@ -124,12 +124,12 @@ func putTask(res http.ResponseWriter, req *http.Request, user taskboard.User) {
 			res.Write([]byte(err.Error()))
 			return
 		}
-        //Should probably look into location here, but I might also give up on it
-        t.PeriodStart = taskboard.PeriodStartByTime(t.PeriodStart) 	
-        if t.UserID == 0 {
-            t.UserID = user.ID;
-        }	
-        tasks = append(tasks, t)
+		//Should probably look into location here, but I might also give up on it
+		t.PeriodStart = taskboard.PeriodStartByTime(t.PeriodStart)
+		if t.UserID == 0 {
+			t.UserID = user.UserID
+		}
+		tasks = append(tasks, t)
 	}
 
 	storedTasks, err := taskboard.PutTasks(tasks, user, ctx)
